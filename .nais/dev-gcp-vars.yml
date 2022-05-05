@@ -1,0 +1,8 @@
+app: onion
+namespace: plattformsikkerhet
+team: plattformsikkerhet
+ingresses:
+  - https://onion.dev-gcp.nais.io
+replicas:
+  min: 1
+  max: 2
