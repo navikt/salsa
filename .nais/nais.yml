@@ -5,6 +5,7 @@ metadata:
   namespace: {{namespace}}
   labels:
     team: {{team}}
+    nais/salsa: enabled
   annotations:
     config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "10"
     nais/salsa: enabled
