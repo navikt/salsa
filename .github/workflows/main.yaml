@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Push to signed attestation to registry"
-        uses: nais/salsa-registry@v0.1.4
+        uses: nais/salsa-registry@v0.1.5
         with:
           salsa_key: ${{ secrets.SALSA_KMS_KEY }}
           salsa_credentials: ${{ secrets.SALSA_CREDENTIALS }}
