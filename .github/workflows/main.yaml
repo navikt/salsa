@@ -1,0 +1,36 @@
+name: Build, sign and deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 8
+          cache: gradle
+      - run: ./gradlew build fatJar --no-daemon
+
+  build_sign_and_push_registry:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    permissions:
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Push to signed attestation to registry"
+        uses: nais/salsa-registry@v0.0.1
+        with:
+          salsa_key: ${{ secrets.SALSA_KMS_KEY }}
+          salsa_credentials: ${{ secrets.SALSA_CREDENTIALS }}
+          identity_provider: ${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: "gh-onion@nais-io.iam.gserviceaccount.com"

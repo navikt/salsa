@@ -36,15 +36,15 @@ jobs:
           tags: ${{ env.IMAGE }}
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v1.0.0
         with:
           credentials_json: ${{ secrets.SALSA_CREDENTIALS }}
 
       - name: NAIS SLSA Provenance Action
-        uses: nais/salsa@v0.1
+        uses: nais/salsa@v0.6
         with:
           key: ${{ secrets.SALSA_KMS_KEY }}
-          docker_pwd: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload provenance
         uses: actions/upload-artifact@v2
