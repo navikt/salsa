@@ -7,6 +7,11 @@ plugins {
     kotlin("jvm") version "1.5.31"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 group = "com.example"
 version = "0.0.1"
 application {
