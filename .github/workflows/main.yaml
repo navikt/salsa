@@ -16,7 +16,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 8
-          cache: gradle
 
   build_sign_and_push_registry:
     if: github.ref == 'refs/heads/main'
@@ -27,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Push signed attestation to registry"
-        uses: nais/salsa-registry@v0.1.7
+        uses: nais/salsa-registry@v0.1.8
         with:
           salsa_key: ${{ secrets.SALSA_KMS_KEY }}
           salsa_credentials: ${{ secrets.SALSA_CREDENTIALS }}
