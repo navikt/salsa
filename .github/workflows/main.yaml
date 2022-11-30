@@ -17,6 +17,9 @@ jobs:
           distribution: temurin
           java-version: 8
 
+      - name: Build with Gradle
+        run: ./gradlew build fatJar --no-daemon
+
   build_sign_and_push_registry:
     if: github.ref == 'refs/heads/main'
     needs: build
@@ -32,4 +35,3 @@ jobs:
           salsa_credentials: ${{ secrets.SALSA_CREDENTIALS }}
           identity_provider: ${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: "gh-onion@nais-io.iam.gserviceaccount.com"
-          build_cmd: "./gradlew build fatJar --no-daemon"
