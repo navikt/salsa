@@ -49,4 +49,8 @@ tasks {
         sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
         from(sourcesMain.output)
     }
+    cyclonedxBom {
+        setOutputName("sbom")
+        setOutputFormat("json")
+    }
 }
