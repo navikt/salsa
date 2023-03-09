@@ -17,21 +17,12 @@ jobs:
           distribution: temurin
           java-version: 8
 
-      - name: Build with Gradle
-        run: ./gradlew build fatJar --no-daemon
-
   build_sign_and_push_registry:
-    if: github.ref == 'refs/heads/main'
-    needs: build
-    permissions:
-      contents: "read"
-      id-token: "write"
     runs-on: ubuntu-latest
     steps:
-      - name: "Push signed attestation to registry"
-        uses: nais/salsa-registry@v0.1.8
+      - name: NAIS SLSA Provenance Action
+        uses: nais/salsa-action@v0.0.1-beta
         with:
-          salsa_key: ${{ secrets.SALSA_KMS_KEY }}
-          salsa_credentials: ${{ secrets.SALSA_CREDENTIALS }}
-          identity_provider: ${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: "gh-onion@nais-io.iam.gserviceaccount.com"
+          ecosystem: gradle
+          key: ${{ secrets.SALSA_KMS_KEY }}
+          image: ${{ env.IMAGE }}@${{ steps.docker_build.outputs.digest }}
