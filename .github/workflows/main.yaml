@@ -17,9 +17,13 @@ jobs:
           distribution: temurin
           java-version: 8
 
-  build_sign_and_push_registry:
-    runs-on: ubuntu-latest
-    steps:
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ env.IMAGE }}
+
       - name: NAIS SLSA Provenance Action
         uses: nais/salsa-action@v0.0.1-beta
         with:
