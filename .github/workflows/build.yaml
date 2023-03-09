@@ -41,18 +41,17 @@ jobs:
           credentials_json: ${{ secrets.SALSA_CREDENTIALS }}
 
       - name: NAIS SLSA Provenance Action
-        uses: nais/salsa@v0.6
+        uses: nais/salsa-action@v0.0.1-beta
         with:
+          ecosystem: gradle
           key: ${{ secrets.SALSA_KMS_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ env.IMAGE }}@${{ steps.docker_build.outputs.digest }}
 
-      - name: Upload provenance
-        uses: actions/upload-artifact@v2
-        with:
-          path: |
-            ./onion.provenance
-            ./onion.raw.txt
-            ./onion.att
+     # - name: NAIS SLSA Provenance Action
+     #   uses: nais/salsa@v0.6
+     #   with:
+     #     key: ${{ secrets.SALSA_KMS_KEY }}
+     #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-dev-gcp:
     name: Deploy to dev-gcp
