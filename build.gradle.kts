@@ -5,6 +5,7 @@ val logback_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.5.31"
+    id("org.cyclonedx.bom") version "1.7.4"
 }
 
 java {
