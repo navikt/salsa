@@ -36,16 +36,11 @@ jobs:
           push: true
           tags: ${{ env.IMAGE }}
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1.0.0
-        with:
-          credentials_json: ${{ secrets.SALSA_CREDENTIALS }}
-
       - name: NAIS SLSA Provenance Action
-        uses: nais/salsa-action@v0.0.2-beta
+        uses: nais/salsa-action@v0.0.3-beta
         with:
-          ecosystem: gradle
           key: ${{ secrets.SALSA_KMS_KEY }}
+          kms-credentials: ${{ secrets.SALSA_CREDENTIALS }}
           image: ${{ env.IMAGE }}@${{ steps.docker_build.outputs.digest }}
 
      # - name: NAIS SLSA Provenance Action
