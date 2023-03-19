@@ -9,6 +9,9 @@ env:
 
 jobs:
   build:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     name: build
     runs-on: ubuntu-20.04
     steps:
