@@ -36,7 +36,7 @@ jobs:
         with:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
-          team: nais
+          team: plattformsikkerhet
 
       - name: print sa_email
         run: echo ${{ steps.nais_login.outputs.sa_email }}
