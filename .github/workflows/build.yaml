@@ -22,7 +22,7 @@ jobs:
 
       - run: ./gradlew build fatJar --no-daemon
 
-      - uses: nais/docker-build-push@v0
+      - uses: nais/docker-build-push@add_salsa
         id: docker-push
         with:
           team: plattformsikkerhet # required
