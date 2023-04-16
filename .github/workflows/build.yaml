@@ -25,7 +25,7 @@ jobs:
 
   deploy-dev-gcp:
     name: Deploy to dev-gcp
-    needs: build
+    needs: build_and_push
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
